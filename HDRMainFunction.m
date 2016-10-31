@@ -27,17 +27,9 @@ if 1 == 1
 end
     
 if 1== 1
+
     figure
     [coef1,coef2,coef3] = globalToneMapBiasedDark(image1, image2, image3);
-    hdrImage = coef1*image1 + coef2*image2 + coef3*image3;
-    imshow(hdrImage);
-    hdrImage = coef1*image1 + coef2*image2 + coef3*image3;
-    imshow(hdrImage);
-end
-
-if 1== 1
-    figure
-    [coef1,coef2,coef3] = localToneMap(image1, image2, image3);
     hdrImage = coef1*image1 + coef2*image2 + coef3*image3;
     imshow(hdrImage);
     hdrImage = coef1*image1 + coef2*image2 + coef3*image3;
