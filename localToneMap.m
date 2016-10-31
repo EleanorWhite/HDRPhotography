@@ -1,6 +1,9 @@
-function [ coef1, coef2, coef3 ] = localToneMap(im1, im2, im3)
+% localToneMap.m
+% Author: Eleanor White (nwhite@hmc.edu)
+%
 % this is going to mess with the photos to make them tone map
 % and then pass back 1's as the coefficients for backwards compatibility
+function [ coef1, coef2, coef3 ] = localToneMap(im1, im2, im3)
 
     MAX_BRIGHTNESS = 256.0;
     

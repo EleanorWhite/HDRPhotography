@@ -1,31 +1,41 @@
-% Gets coefficients to multiply the images by to get a properly
-% exposed image
-%
-% These coefficients are biased towards the brightest image:
-% so the images will have weight proportional to how bright their brightest
-% pixel is.
-function [coef1,coef2,coef3] = HDRFunctions(im1, im2, im3)
+function [ coef1, coef2, coef3 ] = globalToneMapEqualWeight(im1, im2, im3)
+% this is going to give back coefficients that give every photo 
+% the same dynamic range
+% so for each photo, the brightest point will be 1/3 of maximal brightness
+
+    MAX_BRIGHTNESS = 256.0;
     
-    % Gets the maximum brightness value for the three images
-    im1Hist = imhist(rgb2gray(im1)); % histograms don't do rgb things
-    max1 = max(im1Hist);
-    im2Hist = imhist(rgb2gray(im2));
-    max2 = max(im2Hist);
-    im3Hist = imhist(rgb2gray(im3));
-    max3 = max(im3Hist);
+    % gets the coefficients for the 3 images
+    coef1 = getCoef(im1, 3.0);
+    coef2 = getCoef(im2, 3.0);
+    coef3 = getCoef(im3, 3.0);
     
-    % find the sum of all the maxes
-    totBright = max1+max2+max3;
+    % this gets the coefficient you want to multiply a photo by 
+    function coef = getCoef(im, numPhotos)
+        mostBright = getMostBright(im);
+        fprintf('most bright');
+        disp(mostBright);
+        coef = getNormFactor(mostBright, numPhotos);
+    end
     
-    % find the factor needed to make the sum 256
-    % because 256 is the max brightness for an image
-    normFactor = 256/totBright;
+    % gets the brightest value in a photo
+    function mostBright = getMostBright(im)
+        %imageHist = imhist(rgb2gray(im)); % histograms don't do rgb things
+        %mostBright = max(imageHist);
+        mostBright = max(im(:));
+    end
+ 
+    % normFactor is a factor such that if you multiply the photo by it,
+    % the maximum brightness of the sum of all the photos will be 
+    % Matlab's maximum value for brightness
+    function normFactor = getNormFactor(mostBright, numPhotos)
+        normFactor = (double(MAX_BRIGHTNESS)/double(mostBright));
+        disp(normFactor);
+        normFactor = double(normFactor)/double(numPhotos);
+    end
     
-    % setting all coefficients to norm factor will make the total
-    % photo have the correct maximum brightness
-    coef1 = normFactor %*(max1/totBright);
-    coef2 = normFactor %*(max2/totBright);
-    coef3 = normFactor %*(max3/totBright);
+   
     
+
 end
 

@@ -1,7 +1,10 @@
-function [ coef1, coef2, coef3 ] = globalToneMapBiasedDark(im1, im2, im3)
+% globalToneMapBiasedDark.m
+% Author: Eleanor White
+%
 % this is going to give back coefficients that give every photo 
 % a dynamic range inversely proportional to the magnitude of their
 % maximum brightness
+function [ coef1, coef2, coef3 ] = globalToneMapBiasedDark(im1, im2, im3)
 
     MAX_BRIGHTNESS = 256.0;
     
