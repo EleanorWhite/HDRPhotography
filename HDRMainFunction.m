@@ -1,6 +1,6 @@
 filename1 = ('IMG_3053.JPG') %input(prompt, 'please enter filename');
 filename2 = ('IMG_3054.JPG') %input(prompt, 'please enter filename');
-filename3 = ('IMG_3055.JPG') %input(prompt, 'please enter filename');
+filename3 = ('IMG_3045.JPG') %input(prompt, 'please enter filename');
 
 
 image1 = imread(filename1);
